@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Status from 'Contracts/Enums/status'
 import User from './User'
 
@@ -12,6 +12,9 @@ export default class Task extends BaseModel {
 
   @column()
   public owner?: number
+
+  @column()
+  public filename?: string
 
   @column()
   public description?: string

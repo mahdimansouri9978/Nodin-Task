@@ -21,9 +21,19 @@ export default class TasksController {
 
     public async create({request, response, auth}: HttpContextContract) {
         const data = request.only(["name", "description", "priority"])
+        const file = request.file("file", {
+          extnames : ["jpg", "png"]
+        })
 
         const task = await Task.create(data)
         task.owner = auth.use("api").user!.id
+
+        if (file) {
+          await file.moveToDisk('tasksfile', {
+            name: `${task.id}.${file.extname}`
+          })
+          task.filename = `${task.id}.${file.extname}`
+        }
         await task.save()
         
         return response.json({ task })
@@ -31,10 +41,22 @@ export default class TasksController {
 
       public async update({request, response, params}: HttpContextContract) {
         const data = request.only(["name", "description", "priority"])
+        const file = request.file("file", {
+          extnames : ["jpg", "png"]
+        })
+
         try {
           const task = await Task.findOrFail(params.id)
-          task.merge(data)
-          await task.save()
+                  
+          if (file ) {
+            await file.moveToDisk('tasksfile', {
+            name: `${task.id}.${file.extname}`
+          })
+
+          task.filename = `${task.id}.${file.extname}`
+        }
+        
+        task.merge(data)
   
           return response.json({ task })
         } catch (error) {
@@ -57,6 +79,7 @@ export default class TasksController {
 
       public async search({request, response, auth}: HttpContextContract) {
           const query = request.input("search")
+          
           try {
             const task =await Task.query().where("owner", auth.user!.id).where("name", query)
 

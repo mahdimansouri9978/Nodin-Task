@@ -10,6 +10,9 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
+  @column()
+  public filename?: string
+
   @column({ serializeAs: null })
   public password: string
 
@@ -19,7 +22,7 @@ export default class User extends BaseModel {
   @hasMany(() => Task, {
     foreignKey:"owner"
   })
-  public posts: HasMany<typeof Task>
+  public task: HasMany<typeof Task>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

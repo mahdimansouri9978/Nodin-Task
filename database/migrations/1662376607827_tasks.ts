@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.string("name").notNullable()
       table.text("description").nullable()
+      table.string("filename").nullable()
       table.integer("priority").unsigned().nullable().defaultTo(1)
       table.integer("owner").unsigned().references("id").inTable("users")
       table.timestamps(true, true)

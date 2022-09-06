@@ -27,7 +27,7 @@ Route.group(() => {
 
   Route.post("/login", "UsersController.login")
 
-  Route.post("/forget", "UsersController.forgot").middleware("auth")
+  Route.post("/forget", "UsersController.forgot")
 
   Route.post("/delete", "UsersController.delete").middleware("auth")
 
