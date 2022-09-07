@@ -1,0 +1,24 @@
+paths:
+  /tasks:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Tasks
+      summary: search between usera tasks by name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search:
+                  type: string
+                  summery: "tasks name"
+              required:
+                - search
+
+      responses: 
+        '201':
+          description: task

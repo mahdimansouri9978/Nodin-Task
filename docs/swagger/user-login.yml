@@ -1,0 +1,25 @@
+paths:
+  /users/login:
+    post:
+      tags:
+        - Users
+      summary: login user and get token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "somebody@example.com"
+                password:
+                  type: string
+                  example: "lurem-ipsum"
+              required:
+                - password
+                - email
+      responses: 
+        '201':
+          description: token generated

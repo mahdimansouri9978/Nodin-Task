@@ -1,0 +1,32 @@
+paths:
+  /users:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - Users
+      summary: update user's email or password or file.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "somebody@example.com"
+                  summery: "new email"
+                password:
+                  type: string
+                  example: "lurem-ipsum"
+                  summery: "new password"
+                file:
+                  type: string
+                  format: binary
+                  summery: "new file"
+
+
+      responses: 
+        '201':
+          description: user updated

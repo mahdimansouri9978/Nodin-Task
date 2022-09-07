@@ -1,0 +1,24 @@
+paths:
+  /users/delete:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Users
+      summary: delete user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "somebody@example.com"
+              required:
+                - email
+
+      responses: 
+        '201':
+          description: user deleted

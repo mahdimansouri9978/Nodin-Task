@@ -1,0 +1,24 @@
+paths:
+  /tasks/{id}:
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the task to get
+      security:
+        - bearerAuth: []
+      tags:
+        - Tasks
+      summary: delete a task.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:               
+              type: object
+      responses: 
+        '201':
+          description: Created

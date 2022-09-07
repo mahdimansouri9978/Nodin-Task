@@ -1,0 +1,24 @@
+paths:
+  /users/forget:
+    post:
+      tags:
+        - Users
+      summary: forget password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "somebody@example.com"
+                  require: true
+                password:
+                  type: string
+                  example: "new-password"
+                  require: true
+      responses: 
+        '201':
+          description: password changed

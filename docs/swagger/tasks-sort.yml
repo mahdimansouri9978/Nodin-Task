@@ -1,0 +1,28 @@
+paths:
+  /tasks/sort:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Tasks
+      summary: sort tasks.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sort:
+                  type: string
+                  summery: "field sort"
+                sort_type:
+                  type: string
+                  summery: "dasc asc"
+              required:
+                - sort
+                - sort_type
+
+      responses: 
+        '201':
+          description: task

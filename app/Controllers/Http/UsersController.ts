@@ -20,6 +20,7 @@ export default class UsersController {
     }
 
     public async register({request}: HttpContextContract) {
+
         const userSchema = schema.create({
             email: schema.string({ trim: true}, [rules.unique({ table:"users", column: "email"}),
              rules.email()]),
@@ -43,10 +44,10 @@ export default class UsersController {
         user.filename = `${user.id}.${file.extname}`
         user.save()
         }
-
+        console.log(user.password)
       return user
       }
-    
+
     public async login({request, response, auth}: HttpContextContract) {
       const email = request.input('email')
       const password = request.input('password')
@@ -75,10 +76,9 @@ export default class UsersController {
 
     public async forgot({request, response}: HttpContextContract) {
         try {
-            const hashedPassword = await Hash.make(request.input("password"))
-
             const user = await User.findByOrFail("email", request.input("email"))
-            user.password = hashedPassword
+            console.log(user.password)
+            user.password = request.input("password")
             user.save()
             
          return response.json({massage: "password changes succesfully"})
@@ -97,11 +97,11 @@ export default class UsersController {
 
     }
 
-    public async update({request, response}: HttpContextContract) {
+    public async update({request, response, auth}: HttpContextContract) {
         const data = await request.only(["email", "password"])
         const file = request.file("file")
 
-        const user = await User.findByOrFail("email", data.email)
+        const user = await User.findOrFail(auth.user!.id)
             
         if (file) {
           await file.moveToDisk('usersfiles', {
@@ -110,8 +110,10 @@ export default class UsersController {
           user.filename = `${user.id}.${file.extname}`
         }
 
-        user.email = data.email
-        user.password = data.password
+        if (data.email || data.password) {
+          user.merge(data)
+        }
+        
         await user.save()
     
         return response.json({ user })

@@ -23,13 +23,14 @@ import Route from '@ioc:Adonis/Core/Route'
 
 // Users Routes
 Route.group(() => {
+  
   Route.post("/register", "UsersController.register")
 
   Route.post("/login", "UsersController.login")
 
   Route.post("/forget", "UsersController.forgot")
 
-  Route.post("/delete", "UsersController.delete").middleware("auth")
+  Route.delete("/delete", "UsersController.delete").middleware("auth")
 
   Route.put("/", "UsersController.update").middleware("auth")
 

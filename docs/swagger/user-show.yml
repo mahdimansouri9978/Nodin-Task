@@ -1,0 +1,22 @@
+paths:
+  /users/show:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Users
+      summary: show user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: string
+                page_size:
+                  type: string
+      responses: 
+        '201':
+          description: user updated

@@ -1,0 +1,25 @@
+paths:
+  /tasks/show:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Tasks
+      summary: show users task by page number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: string
+                page_size:
+                  type: string
+              required:
+                - page
+                - page_size
+      responses: 
+        '201':
+          description: task

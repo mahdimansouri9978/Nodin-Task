@@ -12,11 +12,15 @@ export default class TasksController {
         return response.json({ task })
       }
 
-    public async show({response}: HttpContextContract) {
+    public async show({response, auth}: HttpContextContract) {
+        try {
+          const task = await Task.findByOrFail("owner", auth.user!.id)
 
-        const task = await Task.all()
+          return response.json({ task })
+        } catch (error) {
+          response.json({massage: "Any task wasn't found"})
+        }
 
-        return response.json({ task })
       }
 
     public async create({request, response, auth}: HttpContextContract) {

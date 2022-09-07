@@ -1,0 +1,29 @@
+paths:
+  /users/register:
+    post:
+      tags:
+        - Users
+      summary: Creates a user.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:               
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "somebody@example.com"
+                password:
+                  type: string
+                  example: "lurem-ipsum"
+                file:
+                  type: string
+                  format: binary
+              required:
+                - password
+                - email
+
+      responses: 
+        '201':
+          description: Created
