@@ -6,12 +6,6 @@ paths:
       tags:
         - Tasks
       summary: show users all tasks.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
       responses: 
         '201':
           description: tasks

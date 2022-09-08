@@ -20,6 +20,11 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+// *************************************************
+
+// ####### You can test apis in "/docs" route ######
+
+// *************************************************
 
 // Users Routes
 Route.group(() => {
@@ -28,9 +33,9 @@ Route.group(() => {
 
   Route.post("/login", "UsersController.login")
 
-  Route.post("/forget", "UsersController.forgot")
+  Route.patch("/", "UsersController.forgot")
 
-  Route.delete("/delete", "UsersController.delete").middleware("auth")
+  Route.delete("/", "UsersController.delete").middleware("auth")
 
   Route.put("/", "UsersController.update").middleware("auth")
 
@@ -45,14 +50,14 @@ Route.group(() => {
 
   Route.get("/show", "TasksController.showOne")
 
-  Route.get("/", "TasksController.search")
+  Route.get("/search", "TasksController.search")
 
   Route.get("/sort", "TasksController.sort")
 
   Route.post("/", "TasksController.create")
 
-  Route.put("/:id", "TasksController.update")
+  Route.put("/", "TasksController.update")
 
-  Route.delete("/:id", "TasksController.delete")
+  Route.delete("/delete", "TasksController.delete")
 
 }).prefix("/tasks").middleware("auth")

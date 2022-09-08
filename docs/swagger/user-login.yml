@@ -3,11 +3,11 @@ paths:
     post:
       tags:
         - Users
-      summary: login user and get token.
+      summary: delete logined user.
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:

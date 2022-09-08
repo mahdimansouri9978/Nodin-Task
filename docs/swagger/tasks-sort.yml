@@ -1,28 +1,28 @@
 paths:
   /tasks/sort:
     get:
+      parameters:
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+            - created_at
+            - updated_at
+        required: true
+      - name: sort_type
+        in: query
+        schema:
+          type: string
+          enum:
+            - desc
+            - asc
+        required: true
       security:
         - bearerAuth: []
       tags:
         - Tasks
       summary: sort tasks.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                sort:
-                  type: string
-                  summery: "field sort"
-                sort_type:
-                  type: string
-                  summery: "dasc asc"
-              required:
-                - sort
-                - sort_type
-
       responses: 
         '201':
           description: task

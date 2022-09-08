@@ -1,24 +1,18 @@
 paths:
-  /users/delete:
+  /users:
     delete:
       security:
         - bearerAuth: []
       tags:
         - Users
       summary: delete user.
+      description: you first need login and use token to get access for delete.
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
-              properties:
-                email:
-                  type: string
-                  example: "somebody@example.com"
-              required:
-                - email
-
       responses: 
         '201':
           description: user deleted

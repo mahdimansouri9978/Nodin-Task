@@ -1,13 +1,22 @@
 paths:
-  /tasks/{id}:
+  /tasks:
     put:
       parameters:
-        - in: path
-          name: id
+        - name: old-name
+          in: query
           schema:
-            type: integer
+            type: string
           required: true
-          description: Numeric ID of the task to get
+          description: Tasks name
+        - in: query
+          name: priority
+          description: choose level of you task
+          schema:
+            type: string
+            enum:
+              - low
+              - medium
+              - hard
       security:
         - bearerAuth: []
       tags:
@@ -22,16 +31,14 @@ paths:
               properties:
                 name:
                   type: string
+                  description: new name
                 description:
                   type: string
-                priority:
-                  type: integer
+                  description: new description
                 file:
                   type: string
                   format: binary
-              required:
-                - name
-                - priority
+                  description: only jpg and png format
 
 
       responses: 

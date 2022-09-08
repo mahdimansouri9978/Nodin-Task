@@ -6,10 +6,11 @@ paths:
       tags:
         - Users
       summary: update user's email or password or file.
+      description: first you need login and use token to get access.
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:

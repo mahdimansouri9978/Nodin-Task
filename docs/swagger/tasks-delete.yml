@@ -1,13 +1,13 @@
 paths:
-  /tasks/{id}:
+  /tasks/delete:
     delete:
       parameters:
-        - in: path
-          name: id
+        - name: name
+          in: query
           schema:
-            type: integer
+            type: string
           required: true
-          description: Numeric ID of the task to get
+          description: tasks name
       security:
         - bearerAuth: []
       tags:
@@ -21,4 +21,4 @@ paths:
               type: object
       responses: 
         '201':
-          description: Created
+          description: Delete

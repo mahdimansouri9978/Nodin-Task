@@ -1,5 +1,16 @@
 paths:
   /tasks:
+    parameters:
+      - in: query
+        name: priority
+        description: choose level of you task
+        schema:
+          type: string
+          enum:
+            - low
+            - medium
+            - hard
+    required: true
     post:
       security:
         - bearerAuth: []
@@ -17,16 +28,12 @@ paths:
                   type: string
                 description:
                   type: string
-                priority:
-                  type: integer
                 file:
                   type: string
                   format: binary
+                  description: only jpg and png format
               required:
                 - name
-                - priority
-
-
       responses: 
         '201':
           description: Created

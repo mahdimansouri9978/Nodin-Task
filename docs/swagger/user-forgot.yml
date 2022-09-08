@@ -1,24 +1,26 @@
 paths:
-  /users/forget:
-    post:
+  /users/:
+    patch:
       tags:
         - Users
-      summary: forget password.
+      summary: reset password.
+      description: Send email and new password.
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
                 email:
                   type: string
                   example: "somebody@example.com"
-                  require: true
                 password:
                   type: string
                   example: "new-password"
-                  require: true
+              required:
+                - password
+                - email
       responses: 
         '201':
           description: password changed

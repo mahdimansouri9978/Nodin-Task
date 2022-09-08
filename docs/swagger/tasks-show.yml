@@ -1,25 +1,21 @@
 paths:
   /tasks/show:
     get:
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page_size
+          schema:
+            type: string
       security:
         - bearerAuth: []
       tags:
         - Tasks
-      summary: show users task by page number.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                page:
-                  type: string
-                page_size:
-                  type: string
-              required:
-                - page
-                - page_size
+      summary: pagination tasks.
       responses: 
         '201':
           description: task

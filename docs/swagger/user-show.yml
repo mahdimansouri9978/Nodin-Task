@@ -1,22 +1,22 @@
 paths:
-  /users/show:
+  /users:
     get:
+      parameters:
+        - name: page
+          in: path
+          schema:
+            type: integer
+          required: true
+        - name: page_size
+          in: path
+          schema:
+            type: intger
       security:
         - bearerAuth: []
       tags:
         - Users
       summary: show user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                page:
-                  type: string
-                page_size:
-                  type: string
+      description: pagination and show users image url(jpg fomat)
       responses: 
         '201':
-          description: user updated
+          description: show user
