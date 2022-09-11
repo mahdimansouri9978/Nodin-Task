@@ -17,7 +17,6 @@ export default class UsersController {
 
         // find user
         const userspage = await Database.from("users").paginate(page, pageSize)
-        // const user = await User.find(auth.user!.id)
         const task =await Task.query().where("owner", auth.user!.id).select("*")
         
         // if have image
@@ -28,11 +27,11 @@ export default class UsersController {
           url = "User havn't any image"
         }
 
-        return response.json({userspage, task, url})
+        return response.json({ massage:"Successful", userspage, task, url})
     }
 
     // REGISTER USER 
-    public async register({request}: HttpContextContract) {
+    public async register({request, response}: HttpContextContract) {
 
       // Validation Schema for email and password
         const userSchema = schema.create({
@@ -62,7 +61,7 @@ export default class UsersController {
         user.save()
         }
 
-      return user
+      return response.json({massage:"Successful", user})
       }
 
     // LOGIN USER AND GET TOKEN
@@ -155,7 +154,7 @@ export default class UsersController {
         
         await user.save()
     
-        return response.json({ user })
+        return response.json({massage:"Successful", user})
       }
 
 }

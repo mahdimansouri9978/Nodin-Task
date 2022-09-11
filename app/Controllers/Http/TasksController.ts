@@ -13,7 +13,7 @@ export default class TasksController {
 
         const task = await Database.from("tasks").paginate(page, pageSize)
 
-        return response.json({ task })
+        return response.json({ massage: "successfull" , task })
       }
 
     // FIND ALL USERS TASKS
@@ -24,7 +24,7 @@ export default class TasksController {
           // Find task
           const task = await Task.query().where("owner", auth.user!.id).select("*")
 
-          return response.json({ task })
+          return response.json({ massage:"Successful", task })
         } catch (error) {
           response.json({massage: error})
         }
@@ -32,6 +32,7 @@ export default class TasksController {
 
     // CREATE TASK
     public async create({request, response, auth}: HttpContextContract) {
+
         // Get data from body and query
         const data = request.only(["name", "description", "priority"])
         const file = request.file("file", {
@@ -68,7 +69,7 @@ export default class TasksController {
 
         await task.save()
         
-        return response.json({ task })
+        return response.json({massage:"Successful", task })
       }
 
       // UPDATE TASK
@@ -115,7 +116,7 @@ export default class TasksController {
             task.merge(data)
             task.save()
   
-          return response.json({ task })
+          return response.json({massage:"Successful", task })
         } catch (error) {
           return response.json({massage: "task not found!"})
         }
@@ -147,7 +148,7 @@ export default class TasksController {
           // Find users task
           const task =await Task.query().where("owner", auth.user!.id).andWhere("name", query)
 
-            return response.json({ task })
+            return response.json({massage:"Successful", task })
           }
 
       // SORT TASKS
@@ -162,7 +163,7 @@ export default class TasksController {
           // Find and sort
           const tasks =await Task.query().where("owner", auth.user!.id).orderBy(sort, sortType)
 
-          return response.json({ tasks })
+          return response.json({massage:"Successful", tasks })
         } catch (error) {
           return response.json({error: "there's no such a task"})
         }
