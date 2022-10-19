@@ -3,7 +3,7 @@ Hey !!<br />
 This is a practicing project to work with Adonis5<br />
 This app contains register and login user.<br />
 Any User can have own tasks and file<br />
-and for management of tasks and acounnt needs to be authenticate.<br />
+and for management of tasks and account needs to be authenticate.<br />
 The tecnology that used for authenticate is json web token (jwt).<br />
 User first need login and get his own token <br />
 then Used the token in auth part of api to get access.<br />
