@@ -9,7 +9,7 @@ User first need login and get his own token <br />
 then Used the token in auth part of api to get access.<br />
 Even theres a reset part of password for the times that user forgot his password.<br />
 And this project have an UI swagger for testing apis that available in "/docs" route<br />
-Theres more escription in UI swagger is available.<br />
+Theres more description in UI swagger is available.<br />
 
 
 GET START:<br />
